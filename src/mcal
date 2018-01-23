@@ -1,0 +1,43 @@
+#Titulo: Practica 3.1 mcal
+#Autores:	Javier Conde Diaz (44659904E)
+#		Jesus Ventas Muñoz de Lucas (47532965S)
+
+#!/bin/bash
+
+# mcal [mes] [ano]
+#devuelve la fecha del año o mes especificado por defecto el mes actual.
+#Codgios de error para exit
+
+
+E_NARG=21 #numero invalido de argumentos
+E_MES=22 #numero invalido de mes
+E_ANO=23 #numero invalido de año
+
+#Otras variables
+MISCRIPT=`basename $0` #Nombre del script sin path
+arg1=$1
+arg2=$2
+nargs=$#
+set `date`
+case $nargs in #Comprobamos el numero de argumentos
+0) mes=$2; ano=$6; cal $mes $ano; exit 0;; #Devuelve el mes y el año actual
+1) case $arg1 in #Con un case compruebo los cuatro casos que hay: comando help, paso solo mes, paso solo año.
+   -help*) echo "Uso: ${MISCRIPT} [mes] [ano]"; echo "Proporciona el calendario pasado como pararmetro" >&2;echo "Si solo pasas un parametro intenta adivinar si era mes o año lo que buscabas" >&2;; #se saca por error para el caso de -help file que no te cree un file.
+   1[3-9]|[2-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]) ano=$arg1; cal $ano; exit 0;;
+   [1-9]|1[0-2]|[Ee][Nn][Ee]*|[Ff][Ee][Bb]*|[Mm][Aa][Rr]*|[Aa][Bb][Rr]*|[Mm][Aa][Yy]*|[Jj][Uu][Nn]*|[Jj][Uu][Ll]*|[Aa][Gg][Oo]*|[Ss][Ee][Pp]*|[Oo][Cc][Tt]*|[Nn][Oo][Vv]*|[Dd][Ii][Cc]*|[Jj][Aa][Nn]*|[Aa][Pp][Rr]*|[Aa][Uu][Gg]*|[Dd][Ee][Cc]*) ano=$6; mes=$arg1; cal $mes $ano; exit 0;;
+   *)echo "Uso: ${MISCRIPT} [mes] [ano]" >&2; exit ${E_MES};
+   esac;;
+2)case $arg1 in
+   [1-9]|1[0-2]|[Ee][Nn][Ee]*|[Ff][Ee][Bb]*|[Mm][Aa][Rr]*|[Aa][Bb][Rr]*|[Mm][Aa][Yy]*|[Jj][Uu][Nn]*|[Jj][Uu][Ll]*|[Aa][Gg][Oo]*|[Ss][Ee][Pp]*|[Oo][Cc][Tt]*|[Nn][Oo][Vv]*|[Dd][Ii][Cc]*|[Jj][Aa][Nn]*|[Aa][Pp][Rr]*|[Aa][Uu][Gg]*|[Dd][Ee][Cc]*);; #Argumento correcto 
+   *)echo "Uso: ${MISCRIPT} [mes] [ano]" >&2; exit ${E_MES};;
+   esac
+   case $arg2 in
+   [0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]);; #Argumento correcto
+   *)echo "Uso: ${MISCRIPT} [mes] [ano]" >&2; exit ${E_ANO};;
+   esac
+   mes=$arg1; ano=$arg2; cal $mes $ano; exit 0;;
+
+*) echo "Uso: ${MISCRIPT} [mes] [ano]" >&2; exit ${E_NARG};; #Mas de tres argumentos proporciona error.
+esac
+exit $?
+
