@@ -1,0 +1,44 @@
+////////////////////////////////////////////////
+///					     ///
+/// 		PRÁCTICA 5		     ///
+///					     ///
+/// 		   CORE			     ///
+///					     ///
+////////////////////////////////////////////////
+
+------------------------------------------------
+ALUMNOS
+------------------------------------------------
+Javier Conde Díaz - 44659904E
+Jesús Ventas Muñoz de Lucas - 47532965
+
+------------------------------------------------
+EJERCICIO 1
+------------------------------------------------
+
+1 - echo: escribe por consola el texto que se introduce a continuacion del comando
+ls -l: lista  los ficheros del directorio actual, y con -l se muestran en formato largo, incluyendo permisos, tamaño, etc.
+cp: copia un fichero en otro
+vi: es un procesador de texto por comandos. Permite introducir, modificar, borrar o copiar texto, entre otras acciones.
+ls -li: igual que ls -l, pero la opción -i nos incluye el nodo -i.
+more: muestra el contenido del fichero que se introduce a continuacion.
+od: permite ver los caracteres ascii, octal o hexadecimal del fichero de texto. Añadiendo -c se visualiza el ascii, y poniendo -b se visualiza el archivo en octal (Por eso salen los caracteres y el código octal de cada caracter).
+2 - Para guardar en un fichero el texto introducido.
+3 - ls solo muestra el nombre de los ficheros del directorio actual. Si añado -l muestra más detalles sobre los ficheros (tamaño, permisos, última modificación...) y si añado -i incluye el número de nodo-i.
+4 - \n indica el final de la cadena. El blanco es 040 y el . es 056.
+5 - ls -a muestra también los ficheros ocultos, y por tanto aparece el archivo .invisible creado con touch, a diferencia de ls.
+
+------------------------------------------------
+EJERCICIO 2
+------------------------------------------------
+
+1- ls -l temp.old: muestra los ficheros del directorio actual en formato largo
+chmod 600: modifica los permisos del archivo temp.old, dándole a los usuarios permisos de lecture y escritura, y quitándole todos los permisos tanto al resto de miembros del grupo como a otros.
+mkdir directorio: crea un directorio con nombre "directorio" dentro del directorio actual.
+ls -ld directorio: muestra en formato largo(por -l) los directorios solo (por -d) del directorio en el que estamos.
+chmod 700: modifica los permisos del directorio, dándole a los usuarios permisos de lecture, escritura y ejecución, y quitándole todos los permisos tanto al resto de miembros del grupo como a otros.
+2 - path absoluto /home/jventas/directorio
+path relativo jventas/directorio
+(Suponiendo que lo he creado justo dentro de home)
+3 - 600 en binario es 110 000 000. cada bit representa la activación o no de los permisos rwx (lectura, escritura o ejecución), poniendo a 1 el que queremos activar y a 0 el que no queremos activar. son 3 números octales (9 bits) porque estos permisos existen para usuario, miembros de su grupo y otros. En este caso, chmod 600 indica que se activan los permisos de lectura y escritura para el usuario, y ningún otro.
+4 - ls -l no muestra los directorios, y por tanto mostraría que no hay. Sin embargo, ls -ld mostraría el directorio "directorio" en formato largo, ya que la opción -d le indica que muestre los directorios.
